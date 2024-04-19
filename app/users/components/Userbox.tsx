@@ -18,8 +18,6 @@ export default function Userbox({ data }: UserBoxProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("OOOOOO", data);
-
   const handleClick = useCallback(() => {
     setIsLoading(true);
 
