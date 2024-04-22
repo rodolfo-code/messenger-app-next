@@ -69,11 +69,7 @@ const Form = () => {
   const onEmojiClick = (event: any, emojiObject: any) => {
     const prevMessage = getValues("message");
     const addEmoji = prevMessage + event.emoji;
-    console.log("emojiObject.emoji", event.emoji);
-    console.log("event", event);
     setValue("message", addEmoji);
-    // setInputStr((prevInput) => prevInput + emojiObject.emoji);
-    // setShowPicker(false);
   };
 
   const handleOpenEmojiModal = () => {
