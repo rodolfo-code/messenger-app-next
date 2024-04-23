@@ -21,16 +21,16 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onDelete = useCallback(() => {
-    // setIsLoading(true);
-    // axios
-    //   .delete(`/api/conversations/${conversationId}`)
-    //   .then(() => {
-    //     onClose();
-    //     router.push("/conversations");
-    //     router.refresh();
-    //   })
-    //   .catch(() => toast.error("Something went wrong!"))
-    //   .finally(() => setIsLoading(false));
+    setIsLoading(true);
+    axios
+      .delete(`/api/conversations/${conversationId}`)
+      .then(() => {
+        onClose();
+        router.push("/conversations");
+        router.refresh();
+      })
+      .catch(() => toast.error("Something went wrong!"))
+      .finally(() => setIsLoading(false));
   }, [conversationId, router, onClose]);
 
   return (

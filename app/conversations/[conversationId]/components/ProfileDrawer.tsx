@@ -1,16 +1,15 @@
 "use client";
 
-import React, { Fragment, useMemo, useState } from "react";
-
-import { format } from "date-fns";
-import { IoClose, IoTrash } from "react-icons/io5";
-import { Conversation, User } from "@prisma/client";
-import { Dialog, Transition } from "@headlessui/react";
-
-import ConfirmModal from "./ConfirmModal";
-import Avatar from "@/app/components/Avatar";
 import useOtherUser from "@/app/hooks/useOtherUser";
+import { Conversation, User } from "@prisma/client";
+import { Fragment, useMemo, useState } from "react";
+import { format } from "date-fns";
+import { Dialog, Transition } from "@headlessui/react";
+import { IoClose, IoTrash } from "react-icons/io5";
+import Avatar from "@/app/components/Avatar";
+import ConfirmModal from "./ConfirmModal";
 import AvatarGroup from "@/app/components/AvatarGroup";
+// import useActiveList from "@/app/hooks/useActiveList";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -20,9 +19,11 @@ interface ProfileDrawerProps {
   };
 }
 
-export default function ProfileDrawer({ data, isOpen, onClose }: ProfileDrawerProps) {
+const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose, data }) => {
   const otherUser = useOtherUser(data);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  // const { members } = useActiveList();
+  // const isActive = members.indexOf(otherUser?.email!) !== -1;
 
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createdAt), "PP");
@@ -37,6 +38,7 @@ export default function ProfileDrawer({ data, isOpen, onClose }: ProfileDrawerPr
       return `${data.users.length} members`;
     }
 
+    // return isActive ? "Active" : "Offline";
     return "Active";
   }, [data]);
 
@@ -54,8 +56,16 @@ export default function ProfileDrawer({ data, isOpen, onClose }: ProfileDrawerPr
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-40" />
+            <div
+              className="
+                fixed
+                inset-0
+                bg-black
+                bg-opacity-40
+              "
+            />
           </Transition.Child>
+
           <div
             className="
               fixed
@@ -91,9 +101,10 @@ export default function ProfileDrawer({ data, isOpen, onClose }: ProfileDrawerPr
                 >
                   <Dialog.Panel
                     className="
-                  pointer-events-auto
-                  w-screen
-                  max-w-md"
+                      pointer-events-auto
+                      w-screen
+                      max-w-md
+                    "
                   >
                     <div
                       className="
@@ -308,4 +319,6 @@ export default function ProfileDrawer({ data, isOpen, onClose }: ProfileDrawerPr
       </Transition.Root>
     </>
   );
-}
+};
+
+export default ProfileDrawer;
