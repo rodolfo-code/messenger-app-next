@@ -1,9 +1,11 @@
 import nextAuth, { getServerSession } from "next-auth";
 import { authOptions } from "../libs/auth";
+import NextAuth from "next-auth/next";
 
-// import { authOptions } from "../api/auth/[...nextauth]/route";
-// import authOptions from "../api/auth/[...nextauth]/route"
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
 
 export default async function getSession() {
-  return await getServerSession(authOptions);
+  return await getServerSession(handler);
 }
