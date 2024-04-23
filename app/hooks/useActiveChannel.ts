@@ -7,8 +7,6 @@ const useActiveChannel = () => {
   const { set, add, remove } = useActiveList();
   const [activeChannel, setActiveChannel] = useState<Channel | null>(null);
 
-  console.log("AQUI OOOOOOOOOOOOOO", activeChannel);
-
   useEffect(() => {
     let channel = activeChannel;
 
